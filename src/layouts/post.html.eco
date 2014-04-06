@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title><%= @getPreparedTitle() %></title>
+    <%- @getBlock("styles").add(["/styles/style.css"]).toHTML() %>
+    <%- @getBlock("scripts").add(["/vendor/jquery.js","/scripts/script.js"]).toHTML() %>
+ </head>
+<body>
+<img src="/images/logo.jpg"></img>
+<ul>
+	<% for post in @getCollection("posts").toJSON(): %>
+		<li class="<%= if post.id is @document.id then 'active' else 'inactive' %>">
+			<a href="<%= post.url %>">
+				<%= post.title %>
+			</a>
+		</li>
+	<% end %>
+</ul>
+<h1><%= @document.title %></h1>
+<%- @content %>
+</body>
+</html>
